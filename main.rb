@@ -16,37 +16,49 @@ book1 = Book.new('Book1 title', 'Book1 author')
 book2 = Book.new('Book2 title', 'Book2 author')
 
 # person has rented book1 and book2
-rental = Rental.new('2021-01-01', book1, person)
-rental = Rental.new('2021-01-01', book2, person)
+rental1 = Rental.new('2021-01-01', book1, person)
+rental2 = Rental.new('2021-01-01', book2, person)
 # student1 has rented book1
-rental = Rental.new('2021-01-01', book1, student1)
+rental3 = Rental.new('2021-01-01', book1, student1)
 # techer1 has rented book2
-rental = Rental.new('2021-01-01', book2, teacher)
+rental4 = Rental.new('2021-01-01', book2, teacher)
 
 # Adding studets to math_classroom
 math_classroom.add_student(student1)
 math_classroom.add_student(student2)
 
-print "Who has rented book1?: "
-puts book1.rentals.map {|rental| rental.person.name}.join(', ')
+print 'Who has rented book1?: '
+puts book1.rentals.map { |rental| rental.person.name }.join(', ')
 
-print "Who has rented book2?: "
-puts book2.rentals.map {|rental| rental.person.name}.join(', ')
+print 'Who has rented book2?: '
+puts book2.rentals.map { |rental| rental.person.name }.join(', ')
 
-print "Person rentals: "
-puts person.rentals.map {|rental| rental.book.title}.join(', ')
+print 'Person rentals: '
+puts person.rentals.map { |rental| rental.book.title }.join(', ')
 
-print "Student1 rentals: "
-puts student1.rentals.map {|rental| rental.book.title}.join(', ')
+print 'Student1 rentals: '
+puts student1.rentals.map { |rental| rental.book.title }.join(', ')
 
-print "Teacher1 rentals: "
-puts teacher.rentals.map {|rental| rental.book.title}.join(', ')
+print 'Teacher1 rentals: '
+puts teacher.rentals.map { |rental| rental.book.title }.join(', ')
 
-print "Students in math_classroom: "
-puts math_classroom.students.map {|student| student.name}.join(', ')
+print 'Students in math_classroom: '
+puts math_classroom.students.map(&:name).join(', ')
 
-print "Student1 classroom: "
+print 'Student1 classroom: '
 puts student1.classroom.label
 
-print "Student2 classroom: "
+print 'Student2 classroom: '
 puts student2.classroom.label
+
+print 'Details of rental1: '
+puts "Book: #{rental1.book.title}, Person: #{rental1.person.name}"
+
+print 'Details of rental2: '
+puts "Book: #{rental2.book.title}, Person: #{rental2.person.name}"
+
+print 'Details of rental3: '
+puts "Book: #{rental3.book.title}, Person: #{rental3.person.name}"
+
+print 'Details of rental4: '
+puts "Book: #{rental4.book.title}, Person: #{rental4.person.name}"
