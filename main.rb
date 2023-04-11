@@ -1,64 +1,112 @@
-require_relative 'person'
-require_relative 'book'
-require_relative 'rental'
-require_relative 'classroom'
-require_relative 'student'
-require_relative 'teacher'
+require_relative 'app'
 
-math_classroom = Classroom.new('Mathematics')
+def print_menu
+  puts "\nPlease choose an option by entering a number:"
+  puts '1 - List all books'
+  puts '2 - List all people'
+  puts '3 - Create a person'
+  puts '4 - Create a book'
+  puts '5 - Create a rental'
+  puts '6 - List all rentals for a given person id'
+  puts "7 - Exit\n\n"
+  gets.chomp.to_i
+end
 
-person = Person.new(18, name: 'person1')
-student1 = Student.new(30, math_classroom, name: 'student1')
-student2 = Student.new(45, math_classroom, name: 'student2')
-teacher = Teacher.new(55, nil, name: 'teacher1')
+def option1(app)
+  app.list_books
+end
 
-book1 = Book.new('Book1 title', 'Book1 author')
-book2 = Book.new('Book2 title', 'Book2 author')
+def option2(app)
+  app.list_people
+end
 
-# person has rented book1 and book2
-rental1 = Rental.new('2021-01-01', book1, person)
-rental2 = Rental.new('2021-01-01', book2, person)
-# student1 has rented book1
-rental3 = Rental.new('2021-01-01', book1, student1)
-# techer1 has rented book2
-rental4 = Rental.new('2021-01-01', book2, teacher)
+def option3(app)
+  print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
+  type = gets.chomp.to_i
+  print 'Age: '
+  age = gets.chomp.to_i
+  print 'Name: '
+  name = gets.chomp
+  if type == 1
+    print 'Has parent permission? [Y/N]: '
+    parent_permission = gets.chomp.downcase == 'y'
+    app.create_person(name, age, 'student', parent_permission: parent_permission)
+  elsif type == 2
+    print 'Specialization: '
+    specialization = gets.chomp
+    app.create_person(name, age, 'teacher', specialization: specialization)
+  else
+    puts 'Invalid option'
+  end
+end
 
-# Adding studets to math_classroom
-math_classroom.add_student(student1)
-math_classroom.add_student(student2)
+def option4(app)
+  print 'Title: '
+  title = gets.chomp
+  print 'Author: '
+  author = gets.chomp
+  app.create_book(title, author)
+end
 
-print 'Who has rented book1?: '
-puts book1.rentals.map { |rental| rental.person.name }.join(', ')
+def option5(app)
+  print "Select a book from the following list by number\n"
+  app.list_books(show_index: true)
+  book_index = gets.chomp.to_i
 
-print 'Who has rented book2?: '
-puts book2.rentals.map { |rental| rental.person.name }.join(', ')
+  print "Select a person from the following list by number (not id)\n"
+  app.list_people(show_index: true)
+  people_index = gets.chomp.to_i
 
-print 'Person rentals: '
-puts person.rentals.map { |rental| rental.book.title }.join(', ')
+  print 'Date: '
+  date = gets.chomp
 
-print 'Student1 rentals: '
-puts student1.rentals.map { |rental| rental.book.title }.join(', ')
+  app.create_rental(date, book_index, people_index)
+end
 
-print 'Teacher1 rentals: '
-puts teacher.rentals.map { |rental| rental.book.title }.join(', ')
+def option6(app)
+  print 'ID of person: '
+  id = gets.chomp.to_i
+  app.list_rentals_for(id)
+end
 
-print 'Students in math_classroom: '
-puts math_classroom.students.map(&:name).join(', ')
+def evaluate_options(selected_option, app)
+  case selected_option
+  when 1
+    option1(app)
+  when 2
+    option2(app)
+  when 3
+    option3(app)
+  when 4
+    option4(app)
+  when 5
+    option5(app)
+  when 6
+    option6(app)
+  end
+end
 
-print 'Student1 classroom: '
-puts student1.classroom.label
+def main
+  app = App.new
+  selected_option = 0
 
-print 'Student2 classroom: '
-puts student2.classroom.label
+  puts 'Welcome to School Library App!'
 
-print 'Details of rental1: '
-puts "Book: #{rental1.book.title}, Person: #{rental1.person.name}"
+  while selected_option != 7
+    selected_option = print_menu
 
-print 'Details of rental2: '
-puts "Book: #{rental2.book.title}, Person: #{rental2.person.name}"
+    if selected_option == 7
+      puts 'Thank you for using this app!'
+      break
+    end
 
-print 'Details of rental3: '
-puts "Book: #{rental3.book.title}, Person: #{rental3.person.name}"
+    if selected_option < 1 || selected_option > 7
+      puts 'That is not a valid option'
+      next
+    end
 
-print 'Details of rental4: '
-puts "Book: #{rental4.book.title}, Person: #{rental4.person.name}"
+    evaluate_options(selected_option, app)
+  end
+end
+
+main
