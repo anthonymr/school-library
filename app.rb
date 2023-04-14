@@ -20,11 +20,11 @@ class App
 
   def list_people(show_index: false)
     if show_index
-      @people.each_with_index do |person, index|
-        puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+      @persons.each_with_index do |person, index|
+        puts "#{index}) [#{person.class}] Name: #{person}, ID: #{person.id}, Age: #{person.age}"
       end
     else
-      @people.each { |person| puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
+      @persons.each { |person| puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
     end
   end
 
