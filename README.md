@@ -72,6 +72,12 @@ To run the project, execute the following command in terminal:
 - Twitter: [@Anthony2Martin](https://twitter.com/Anthony2Martin)
 - LinkedIn: [anthony-martin](https://www.linkedin.com/in/anthony-martin-8820a3117/)
 
+👤 **Wai Yan Phyo**
+
+- GitHub: [oyhpnayiaw](https://github.com/oyhpnayiaw)
+- Twitter: [@oyhpnayiaw](https://twitter.com/oyhpnayiaw)
+- LinkedIn: [@oyhpnayiaw](https://www.linkedin.com/in/oyhpnayiaw/)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
