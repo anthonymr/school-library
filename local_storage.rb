@@ -31,9 +31,11 @@ class LocalStorage
     end
 
     def load_from_file(filename)
-      return [] unless File.exist?(filename) && !File.zero?(filename)
+      return [] unless File.exist?(filename) && File.empty?(filename)
 
       JSON.parse(File.read(filename))
+    rescue JSON::ParserError
+      []
     end
 
     def array_to_hash(array)
