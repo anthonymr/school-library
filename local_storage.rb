@@ -31,7 +31,7 @@ class LocalStorage
     end
 
     def load_from_file(filename)
-      return [] unless File.exist?(filename)
+      return [] unless File.exist?(filename) && !File.zero?(filename)
 
       JSON.parse(File.read(filename))
     end
