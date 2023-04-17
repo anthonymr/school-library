@@ -101,13 +101,14 @@ def main
   begin
     ui.ask_user_for_option
 
-    unless ui.exit_option?
-      ui.evaluate_option
-    end
+    next unless ui.valid_option?
 
+    ui.evaluate_option unless ui.exit_option?
   end until ui.exit_option?
 
   ui.exit_message
+
+end
 
 =begin  
     selected_option = print_menu
