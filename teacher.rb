@@ -9,4 +9,11 @@ class Teacher < Person
   def can_use_services?
     true
   end
+
+  def to_hash
+    hash = super
+    hash[:specialization] = @specialization
+    hash[:type] = 'teacher'
+    hash
+  end
 end

@@ -16,4 +16,11 @@ class Student < Person
     @classroom = classroom
     classroom.add_student(self) unless classroom.students.include?(self)
   end
+
+  def to_hash
+    hash = super
+    hash[:classroom] = @classroom
+    hash[:type] = 'student'
+    hash
+  end
 end

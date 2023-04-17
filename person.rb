@@ -30,5 +30,14 @@ class Person < Nameable
     rental.person = self
   end
 
+  def to_hash
+    {
+      id: @id,
+      name: @name,
+      age: @age,
+      parent_permission: @parent_permission
+    }
+  end
+
   private :of_age?
 end

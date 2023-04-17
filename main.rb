@@ -1,6 +1,13 @@
 require_relative 'user_interface'
+require_relative 'local_storage'
 
 def main
+  LocalStorage.book_file = 'local_storage/books.json'
+  LocalStorage.person_file = 'local_storage/people.json'
+  LocalStorage.rental_file = 'local_storage/rentals.json'
+
+  LocalStorage.load_data
+
   ui = UserInterface.new
 
   ui.welcome_message
@@ -15,6 +22,9 @@ def main
   end
 
   ui.exit_message
+
+  LocalStorage.save_data(ui.app)
+  
 rescue Interrupt
   puts ''
   ui.exit_message
