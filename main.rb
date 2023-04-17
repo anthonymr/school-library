@@ -1,5 +1,6 @@
-require_relative 'app'
+require_relative 'user_interface'
 
+=begin
 def print_menu
   puts "\nPlease choose an option by entering a number:"
   puts '1 - List all books'
@@ -85,14 +86,30 @@ def evaluate_options(selected_option, app)
     option6(app)
   end
 end
+=end
 
 def main
-  app = App.new
-  selected_option = 0
+  #app = App.new
+  #selected_option = 0
 
-  puts 'Welcome to School Library App!'
+  #puts 'Welcome to School Library App!'
 
-  while selected_option != 7
+  ui = UserInterface.new
+
+  ui.welcome_message
+
+  begin
+    ui.ask_user_for_option
+
+    unless ui.exit_option?
+      ui.evaluate_option
+    end
+
+  end until ui.exit_option?
+
+  ui.exit_message
+
+=begin  
     selected_option = print_menu
 
     if selected_option == 7
@@ -108,5 +125,6 @@ def main
     evaluate_options(selected_option, app)
   end
 end
+=end
 
 main
