@@ -6,9 +6,9 @@ def main
   LocalStorage.person_file = 'local_storage/people.json'
   LocalStorage.rental_file = 'local_storage/rentals.json'
 
-  LocalStorage.load_data
-
   ui = UserInterface.new
+
+  LocalStorage.load_data(ui.app)
 
   ui.welcome_message
 
@@ -24,7 +24,6 @@ def main
   ui.exit_message
 
   LocalStorage.save_data(ui.app)
-  
 rescue Interrupt
   puts ''
   ui.exit_message

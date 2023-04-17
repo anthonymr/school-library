@@ -2,11 +2,15 @@ class Book
   attr_accessor :title, :author
   attr_reader :rentals, :id
 
-  def initialize(title, author)
+  def self.from_json(data)
+    new(data['title'], data['author'], data['id'])
+  end
+
+  def initialize(title, author, id = nil)
     @title = title
     @author = author
     @rentals = []
-    @id = rand(1..1000)
+    @id = id || rand(1..1000)
   end
 
   def add_rental(rental)
@@ -18,7 +22,7 @@ class Book
     {
       id: @id,
       title: @title,
-      author: @author,
+      author: @author
     }
   end
 end

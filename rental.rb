@@ -2,6 +2,12 @@ class Rental
   attr_accessor :date
   attr_reader :book, :person
 
+  def self.from_json(data, books: [], people: [])
+    book = books.find { |b| b.id == data['book_id'] }
+    person = people.find { |p| p.id == data['person_id'] }
+    Rental.new(data['date'], book, person)
+  end
+
   def initialize(date, book, person)
     @date = date
     self.book = book

@@ -2,6 +2,7 @@ require_relative 'app'
 
 class UserInterface
   attr_accessor :app
+
   def initialize
     @app = App.new
     @selected_option = 0
