@@ -48,7 +48,7 @@ describe Person do
       expect(person.to_hash).to eq({ id: person.id, name: 'John', age: 20, parent_permission: true })
     end
   end
-  
+
   context 'When calling private methods inside the class' do
     it 'should return true if the person is of age' do
       person = Person.new(20)
