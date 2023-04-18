@@ -21,14 +21,18 @@ describe Student do
     expect(student.age).to eq(18)
   end
 
-  it '[play_hooky] method should return a string' do
+  student = nil
+
+  before :each do
     student = Student.new(18, nil, name: 'John Doe')
+  end
+
+  it '[play_hooky] method should return a string' do
     expect(student.play_hooky).to be_a(String)
   end
 
   it '[classroom] setter should add student to classroom' do
     classroom = Classroom.new('Math')
-    student = Student.new(18, classroom, name: 'John Doe')
 
     student.classroom = classroom
 
@@ -37,14 +41,10 @@ describe Student do
 
   context 'to_hash' do
     it 'should return the hash' do
-      student = Student.new(18, nil, name: 'John Doe')
-
       expect(student.to_hash).to be_a(Hash)
     end
 
     it 'should return the correct value' do
-      student = Student.new(18, nil, name: 'John Doe')
-
       hash = student.to_hash
 
       expect(hash[:age]).to eq(student.age)
